@@ -1,11 +1,9 @@
-body, html {
-    background-color: #fff;
-}
+
 .OT_subscriber {
     float: left;
     margin-left: 1em;
-    width: 100vh !important;
-    height: 100vh !important;
+    width: 200px !important;
+    height: 200px !important;
 }
 .OT_publisher {
     float: left;
