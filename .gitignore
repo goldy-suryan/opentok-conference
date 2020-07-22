@@ -10,9 +10,10 @@ node_modules/
 
 # Optional npm cache directory
 .npm
-
+.env
 .git 
 
 uploads/
 test/
 dist/
+build/

@@ -1,39 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '@opentok/client';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import './index.css';
 import './polyfills';
-
 import {
-  SAMPLE_SERVER_BASE_URL,
-  API_KEY,
-  SESSION_ID,
-  TOKEN,
-  PROVIDER_TOKEN
-} from './config';
+  BrowserRouter as Router
+} from "react-router-dom";
 
-function renderApp(credentials) {
-  ReactDOM.render(
-    <App credentials={credentials} />,
-    document.getElementById('root')
-  );
-}
 
-if (API_KEY && TOKEN && SESSION_ID && PROVIDER_TOKEN) {
-  renderApp({
-    apiKey: API_KEY,
-    sessionId: SESSION_ID,
-    token: TOKEN,
-    providerToken: PROVIDER_TOKEN
-  });
-} else {
-  fetch(SAMPLE_SERVER_BASE_URL + '/session')
-    .then(data => data.json())
-    .then(renderApp)
-    .catch((err) => {
-      console.error('Failed to get session credentials', err);
-      alert('Failed to get opentok sessionId and token. Make sure you have updated the config.js file.');
-    });
-}
+ReactDOM.render(
+  <Router><App /></Router>,
+  document.getElementById('root')
+);
