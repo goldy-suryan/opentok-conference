@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { OTSession, OTPublisher, OTStreams, OTSubscriber } from 'opentok-react';
 import { withRouter, Link } from "react-router-dom";
 import axios from 'axios';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
 class Room extends Component {
   constructor(props) {
@@ -143,28 +144,38 @@ class Room extends Component {
             onError={this.onSessionError}
             eventHandlers={this.sessionEventHandlers}
           >
-            <button id="videoButton" onClick={this.toggleVideo}>
-              {publishVideo ? 'Disable' : 'Enable'} Video
-              </button>
-            <button id="audioButton" onClick={this.toggleAudio}>
-              {publishAudio ? 'Disable' : 'Enable'} Audio
-              </button>
-            <button onClick={this.shareScreen}>{videoSource === true ? 'Share screen' : 'Stop sharing'}</button>
-            <OTPublisher
-              properties={{ videoSource, publishVideo, publishAudio, width: 100, height: 100 }}
-              onPublish={this.onPublish}
-              onError={this.onPublishError}
-              eventHandlers={this.publisherEventHandlers}
-            />
-            <button onClick={this.endCall}>End Call</button>
-            <OTStreams>
-              <OTSubscriber
-                properties={{ subscribeAudio, subscribeVideo, width: 100, height: 100 }}
-                onSubscribe={this.onSubscribe}
-                onError={this.onSubscribeError}
-                eventHandlers={this.subscriberEventHandlers}
-              />
-            </OTStreams>
+            <ButtonGroup className="mr-2" aria-label="Basic example">
+              <Button variant="primary" onClick={this.toggleVideo}>{publishVideo ? 'Disable' : 'Enable'} Video</Button>
+            </ButtonGroup>
+            <ButtonGroup className="mr-2" aria-label="Basic example">
+              <Button variant="primary" onClick={this.toggleAudio}>{publishAudio ? 'Disable' : 'Enable'} Audio</Button>
+            </ButtonGroup>
+            <ButtonGroup className="mr-2" aria-label="Basic example">
+              <Button variant="primary" onClick={this.shareScreen}>{videoSource === true ? 'Share screen' : 'Stop sharing'}</Button>
+            </ButtonGroup>
+            <ButtonGroup className="mr-2" aria-label="Basic example">
+              <Button variant="primary" onClick={this.endCall}>End Call</Button>
+            </ButtonGroup>
+            <div className="grid-container">
+              <div className="main-page">
+                <OTPublisher
+                  properties={{ videoSource, publishVideo, publishAudio }}
+                  onPublish={this.onPublish}
+                  onError={this.onPublishError}
+                  eventHandlers={this.publisherEventHandlers}
+                />
+              </div>
+              <div className="new">
+                <OTStreams>
+                  <OTSubscriber
+                    properties={{ subscribeAudio, subscribeVideo }}
+                    onSubscribe={this.onSubscribe}
+                    onError={this.onSubscribeError}
+                    eventHandlers={this.subscriberEventHandlers}
+                  />
+                </OTStreams>
+              </div>
+            </div>
           </OTSession>
         </div>
       );
